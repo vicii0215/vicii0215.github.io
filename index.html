@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>fenghuo technology | Used GPUs</title>
+  <meta name="description" content="fenghuo technology — curated used GPUs with clear grading and stress-test notes. Local pickup or shipping." />
+  <meta name="theme-color" content="#0b0f19" />
+  <meta property="og:title" content="fenghuo technology | Used GPUs" />
+  <meta property="og:description" content="Curated used GPUs with grading, test notes, and transparent pricing. Pickup or shipping." />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E" />
+
+  <style>
+    :root{
+      --bg:#0b0f19;
+      --card:#11182a;
+      --card2:#0f1525;
+      --text:#e9eefc;
+      --muted:#a7b3d6;
+      --line:rgba(255,255,255,.10);
+      --brand:#ff5c2a;
+      --brand2:#ffb703;
+      --ok:#37d67a;
+      --warn:#ffd166;
+      --bad:#ff4d6d;
+
+      --radius:18px;
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --max: 1100px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% -10%, rgba(255,92,42,.25), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(255,183,3,.18), transparent 55%),
+        radial-gradient(900px 700px at 60% 110%, rgba(79,70,229,.12), transparent 55%),
+        var(--bg);
+      line-height:1.55;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
+    .nav{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(11,15,25,.85), rgba(11,15,25,.55));
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:14px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}
+    .logo{
+      width:38px;height:38px;border-radius:12px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 10px 25px rgba(255,92,42,.25);
+      display:grid;place-items:center;font-weight:900;color:#151515;
+    }
+    .spacer{flex:1}
+    .nav a.link{color:var(--muted);padding:8px 10px;border-radius:12px}
+    .nav a.link:hover{background:rgba(255,255,255,.06);color:var(--text)}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:11px 14px;border-radius:14px;border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      cursor:pointer;
+      transition: transform .08s ease, background .12s ease, border-color .12s ease;
+      user-select:none;
+    }
+    .btn:hover{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.16)}
+    .btn:active{transform: translateY(1px)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(255,92,42,.95), rgba(255,183,3,.92));
+      color:#151515;border-color:transparent;
+      box-shadow: 0 14px 40px rgba(255,92,42,.20);
+      font-weight:800;
+    }
+
+    .hero{padding:34px 0 10px}
+    .hero-grid{display:grid;grid-template-columns: 1.2fr .8fr;gap:18px;align-items:stretch}
+    @media (max-width: 920px){ .hero-grid{grid-template-columns:1fr} }
+
+    .panel{
+      background: linear-gradient(180deg, rgba(17,24,42,.92), rgba(15,21,37,.92));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:22px;
+    }
+    .kicker{color:var(--muted);font-weight:700;letter-spacing:.4px}
+    h1{margin:10px 0 10px;font-size:38px;line-height:1.1}
+    @media (max-width: 520px){ h1{font-size:32px} }
+    .grad{
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .sub{color:var(--muted);max-width:60ch}
+    .pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .pill{
+      font-size:13px;color:var(--muted);
+      padding:8px 10px;border-radius:999px;border:1px solid var(--line);
+      background:rgba(255,255,255,.03)
+    }
+    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+
+    .mini{display:grid;grid-template-columns: 1fr 1fr;gap:12px}
+    @media (max-width: 520px){ .mini{grid-template-columns:1fr} }
+    .stat{
+      background: rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius: 16px;
+      padding:14px;
+    }
+    .stat b{display:block;font-size:18px}
+    .stat span{color:var(--muted);font-size:13px}
+
+    .section{padding:20px 0}
+    .section h2{margin:0 0 12px;font-size:22px}
+    .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .input, select{
+      padding:11px 12px;border-radius:14px;border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      outline:none;
+    }
+    .input{min-width: 240px}
+    select{min-width: 160px}
+    .hint{color:var(--muted);font-size:13px}
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:14px;
+      margin-top:14px;
+    }
+    @media (max-width: 920px){ .grid{grid-template-columns: repeat(2, minmax(0, 1fr));} }
+    @media (max-width: 520px){ .grid{grid-template-columns: 1fr;} }
+
+    .card{
+      background: linear-gradient(180deg, rgba(17,24,42,.94), rgba(15,21,37,.94));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 12px 35px rgba(0,0,0,.28);
+      overflow:hidden;
+      display:flex;flex-direction:column;
+      min-height: 300px;
+    }
+    .thumb{
+      height:150px;
+      background:
+        radial-gradient(900px 200px at 20% 10%, rgba(255,92,42,.25), transparent 55%),
+        radial-gradient(500px 220px at 90% 20%, rgba(255,183,3,.18), transparent 55%),
+        linear-gradient(135deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border-bottom:1px solid var(--line);
+      position:relative;
+    }
+    .badge{
+      position:absolute;left:12px;top:12px;
+      font-size:12px;font-weight:800;
+      padding:6px 10px;border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(11,15,25,.55);
+      color:var(--text);
+      backdrop-filter: blur(10px);
+    }
+    .badge.ok{border-color:rgba(55,214,122,.35);color:var(--ok)}
+    .badge.warn{border-color:rgba(255,209,102,.35);color:var(--warn)}
+    .badge.bad{border-color:rgba(255,77,109,.35);color:var(--bad)}
+    .card-body{padding:14px;display:flex;flex-direction:column;gap:10px;flex:1}
+    .title{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+    .title h3{margin:0;font-size:16px}
+    .price{font-family:var(--mono);font-weight:900}
+    .meta{color:var(--muted);font-size:13px;display:flex;flex-wrap:wrap;gap:8px}
+    .tag{
+      padding:5px 8px;border:1px solid var(--line);border-radius:999px;
+      background:rgba(255,255,255,.03);
+    }
+    .notes{color:var(--muted);font-size:13px}
+    .card-actions{display:flex;gap:10px;margin-top:auto}
+    .btn.small{padding:9px 11px;border-radius:12px;font-size:13px}
+
+    .two-col{display:grid;grid-template-columns: 1fr 1fr;gap:14px}
+    @media (max-width: 920px){ .two-col{grid-template-columns:1fr} }
+    details{
+      background: rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius: 16px;
+      padding:12px 14px;
+    }
+    details summary{cursor:pointer;font-weight:800}
+    details p{color:var(--muted);margin:10px 0 0}
+
+    .footer{
+      margin-top:18px;
+      padding:18px 0 40px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .mono{font-family:var(--mono)}
+    .muted{color:var(--muted)}
+    .hr{height:1px;background:var(--line);margin:14px 0}
+    .toast{
+      position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%);
+      background: rgba(10,14,24,.92); border:1px solid var(--line);
+      padding:10px 12px; border-radius: 14px; color: var(--text);
+      box-shadow: var(--shadow);
+      display:none;
+      max-width: min(640px, calc(100vw - 24px));
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand" title="fenghuo technology">
+        <div class="logo">🔥</div>
+        <div>
+          <div style="font-size:14px;opacity:.95">fenghuo <span class="muted">technology</span></div>
+          <div style="font-size:12px;color:var(--muted)">Used GPUs · Tested · Updated Stock</div>
+        </div>
+      </div>
+
+      <div class="spacer"></div>
+
+      <a class="link" href="#inventory">Inventory</a>
+      <a class="link" href="#promise">Testing</a>
+      <a class="link" href="#faq">FAQ</a>
+      <a class="link" href="#contact">Contact</a>
+
+      <button class="btn" id="copyLinkBtn" type="button" title="Copy site link">Copy Link</button>
+      <a class="btn primary" href="#inventory">Shop Now</a>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="panel">
+          <div class="kicker">Curated used GPUs with transparent checks</div>
+          <h1>Spend smarter: <span class="grad">tested</span> used GPUs you can trust</h1>
+          <p class="sub">
+            fenghuo technology focuses on used graphics cards. Every unit is
+            <strong>powered on and stress-tested</strong> before listing, with key notes (temps / clocks / fan behavior).
+            Clear grading, transparent pricing, pickup or shipping.
+          </p>
+
+          <div class="pill-row">
+            <span class="pill">✅ Clear condition grading</span>
+            <span class="pill">✅ Stress-test notes</span>
+            <span class="pill">✅ 7-day functional guarantee (editable)</span>
+            <span class="pill">✅ Trade-in optional (editable)</span>
+          </div>
+
+          <div class="cta-row">
+            <a class="btn primary" href="#inventory">View Inventory</a>
+            <a class="btn" href="#contact">Get a Quote</a>
+            <a class="btn" href="#promise">Testing Policy</a>
+          </div>
+
+          <div class="hr"></div>
+          <div class="hint">
+            Tip: This is a static site. For orders, route customers to WhatsApp/Telegram/email below.
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2 style="margin:0 0 10px">Today at a glance</h2>
+          <div class="mini">
+            <div class="stat">
+              <b id="statCount">—</b>
+              <span>GPUs currently in stock</span>
+            </div>
+            <div class="stat">
+              <b class="mono">24h</b>
+              <span>Typical response time (editable)</span>
+            </div>
+            <div class="stat">
+              <b>Grades</b>
+              <span>A / B / C condition guide</span>
+            </div>
+            <div class="stat">
+              <b>Checks</b>
+              <span>Benchmark + stress + game</span>
+            </div>
+          </div>
+
+          <div class="hr"></div>
+          <div class="hint">
+            Update inventory directly in the code — no database required. You can automate later if needed.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVENTORY -->
+    <section class="section" id="inventory">
+      <h2>Inventory</h2>
+
+      <div class="row">
+        <input id="q" class="input" placeholder="Search: 3070 / 12GB / ASUS / triple-fan ..." />
+        <select id="brand">
+          <option value="">Brand: All</option>
+        </select>
+        <select id="vram">
+          <option value="">VRAM: All</option>
+          <option value="8">8GB</option>
+          <option value="10">10GB</option>
+          <option value="12">12GB</option>
+          <option value="16">16GB</option>
+          <option value="24">24GB</option>
+        </select>
+        <select id="grade">
+          <option value="">Grade: All</option>
+          <option value="A">A (Like new)</option>
+          <option value="B">B (Light wear)</option>
+          <option value="C">C (Visible wear)</option>
+        </select>
+        <select id="status">
+          <option value="">Status: All</option>
+          <option value="in_stock">In stock</option>
+          <option value="reserved">Reserved</option>
+          <option value="sold">Sold</option>
+        </select>
+
+        <button class="btn" id="resetBtn" type="button">Reset</button>
+      </div>
+
+      <div class="hint" style="margin-top:10px">
+        Click “Details” for testing notes & deal terms. Edit items in the <span class="mono">PRODUCTS</span> array.
+      </div>
+
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <!-- TESTING / PROMISE -->
+    <section class="section" id="promise">
+      <h2>Testing & Policy</h2>
+      <div class="two-col">
+        <div class="panel">
+          <h3 style="margin:0 0 8px">How we test (editable)</h3>
+          <ul class="muted">
+            <li>Visual inspection: ports, screws, heatsink, fans, oxidation.</li>
+            <li>Power-on check: driver detection, VRAM capacity readout, PCIe link.</li>
+            <li>Stress test: 10–20 minutes; record peak temperature & stability symptoms.</li>
+            <li>Stability: benchmark + a real game/workload to catch artifacts/crashes.</li>
+            <li>Final check before handoff/shipping (cleaning optional).</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h3 style="margin:0 0 8px">Warranty & deal terms (editable)</h3>
+          <ul class="muted">
+            <li><b>7-day functional guarantee</b>: if it arrives DOA / non-functional under normal use (non-human damage), we will work it out.</li>
+            <li><b>Condition grading</b>: A=like new; B=light wear; C=visible wear, fully functional.</li>
+            <li><b>Pickup or shipping</b>: pickup recommended; for shipping, record an unboxing video.</li>
+            <li><b>Accessories</b>: GPU only unless otherwise stated (box/receipt will be noted).</li>
+          </ul>
+          <div class="hr"></div>
+          <div class="hint">
+            Used hardware naturally carries wear risk. Best practice: disclose test method/time/results and any known issues per unit.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <h2>FAQ</h2>
+      <div class="two-col">
+        <details>
+          <summary>Are these ex-mining cards?</summary>
+          <p>
+            You can disclose the source per unit (personal upgrade / studio decommission / etc.). If you do not sell ex-mining cards, state that clearly.
+            Always be truthful and keep test notes.
+          </p>
+        </details>
+
+        <details>
+          <summary>Will it fit my PSU/case?</summary>
+          <p>
+            Add per-item details like suggested PSU wattage, power connectors, and card length. Buyers can share CPU/PSU/case constraints for a quick check.
+          </p>
+        </details>
+
+        <details>
+          <summary>Can I test in person?</summary>
+          <p>
+            Yes. Book a time and agree on what to test (game/benchmark/render) to avoid setup delays.
+          </p>
+        </details>
+
+        <details>
+          <summary>Do you allow deposits/reservations?</summary>
+          <p>
+            Yes. Mark items as “Reserved” and specify the hold period and rules.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <h2>Contact & Order</h2>
+      <div class="panel">
+        <div class="two-col">
+          <div>
+            <h3 style="margin:0 0 8px">Quick contact</h3>
+            <p class="muted" style="margin:0 0 10px">
+              Update these to your real WhatsApp/Telegram/email details.
+            </p>
+            <div class="row">
+              <a class="btn primary" id="waBtn" href="#" target="_blank" rel="noreferrer">WhatsApp</a>
+              <a class="btn" id="mailBtn" href="#">Email</a>
+              <button class="btn" id="copyContactBtn" type="button">Copy Contact</button>
+            </div>
+            <div class="hr"></div>
+            <div class="hint">
+              Recommended: mention your area (e.g., “Singapore pickup / islandwide shipping”) and accepted payment methods (PayNow/PayLah/bank transfer).
+            </div>
+          </div>
+
+          <div>
+            <h3 style="margin:0 0 8px">Order template (copy & send)</h3>
+            <div class="stat" style="padding:14px">
+              <div class="mono" id="orderTpl" style="white-space:pre-wrap;font-size:12.5px;color:var(--text)">
+[Order Info]
+Model:
+Grade/Status:
+Price:
+Pickup/Shipping:
+Area:
+PC specs (CPU/PSU/Case limit):
+Requested tests:
+              </div>
+              <div class="row" style="margin-top:10px">
+                <button class="btn small" id="copyOrderBtn" type="button">Copy Template</button>
+                <span class="hint">Paste into chat and send</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+        <div class="hint">
+          © <span id="year"></span> fenghuo technology. Listings are for display; final terms confirmed via direct message/invoice.
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <div class="wrap" style="padding:0;max-width:var(--max)">
+        <div class="row" style="justify-content:space-between">
+          <div>🔥 fenghuo technology — Used GPUs</div>
+          <div class="mono">Pure HTML/CSS/JS · GitHub Pages ready</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- MODAL -->
+  <dialog id="dlg" style="border:none;border-radius:18px;padding:0;background:transparent;max-width:min(720px, calc(100vw - 24px));">
+    <div class="panel" style="padding:18px">
+      <div style="display:flex;align-items:flex-start;gap:12px">
+        <div style="width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;color:#151515;font-weight:900">GPU</div>
+        <div style="flex:1">
+          <div class="kicker" id="mKicker">—</div>
+          <h3 style="margin:4px 0 0" id="mTitle">—</h3>
+          <div class="muted" style="font-size:13px;margin-top:6px" id="mMeta">—</div>
+        </div>
+        <button class="btn small" id="closeDlg" type="button">Close</button>
+      </div>
+
+      <div class="hr"></div>
+      <div class="muted" id="mDesc" style="white-space:pre-wrap"></div>
+
+      <div class="hr"></div>
+      <div class="row">
+        <a class="btn primary" id="mBuy" href="#contact">Contact to Order</a>
+        <button class="btn" id="mCopy" type="button">Copy Item Info</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    // ========= Edit these: contact + inventory =========
+    const CONTACT = {
+      whatsappE164: "6588888888", // change to your WhatsApp number (country code + number)
+      email: "sales@fenghuo.tech", // change to your email
+      displayText: "WhatsApp: +65 8888 8888 | Email: sales@fenghuo.tech"
+    };
+
+    // status: in_stock / reserved / sold
+    // grade: A / B / C
+    const PRODUCTS = [
+      {
+        id: "FH-RTX3070-01",
+        title: "NVIDIA GeForce RTX 3070 8GB (ASUS TUF)",
+        brand: "ASUS",
+        vram: 8,
+        grade: "B",
+        status: "in_stock",
+        price: 399,
+        currency: "SGD",
+        tags: ["triple-fan", "8GB", "PCIe 4.0"],
+        test: { peakTempC: 74, notes: "10min stress test stable, no artifacts/driver drops. Fans OK." },
+        desc:
+`[Condition] B (light wear)
+[Testing] Driver OK; stress-test stable; peak temp 74°C
+[Known issues] None observed
+[In the box] GPU only
+[Deal] Pickup or shipping (unboxing video recommended)`
+      },
+      {
+        id: "FH-RX6800-01",
+        title: "AMD Radeon RX 6800 16GB (SAPPHIRE PULSE)",
+        brand: "SAPPHIRE",
+        vram: 16,
+        grade: "A",
+        status: "in_stock",
+        price: 469,
+        currency: "SGD",
+        tags: ["16GB", "dual-fan", "high VRAM"],
+        test: { peakTempC: 71, notes: "Benchmark + game test OK, solid thermals." },
+        desc:
+`[Condition] A (like new)
+[Testing] Stable in benchmark & games; peak temp 71°C
+[Good for] 1440p / some 4K; VRAM-heavy workflows
+[Accessories] Box/receipt if available will be stated`
+      },
+      {
+        id: "FH-RTX3080-01",
+        title: "NVIDIA GeForce RTX 3080 10GB (MSI Ventus)",
+        brand: "MSI",
+        vram: 10,
+        grade: "C",
+        status: "reserved",
+        price: 499,
+        currency: "SGD",
+        tags: ["10GB", "high performance"],
+        test: { peakTempC: 78, notes: "Functional; visible cosmetic wear." },
+        desc:
+`[Condition] C (visible wear, fully functional)
+[Testing] Stress-test stable; peak temp 78°C
+[Notes] Pricing reflects cosmetics; pickup test recommended`
+      },
+      {
+        id: "FH-RTX3060TI-01",
+        title: "NVIDIA GeForce RTX 3060 Ti 8GB (Gigabyte Eagle)",
+        brand: "GIGABYTE",
+        vram: 8,
+        grade: "B",
+        status: "sold",
+        price: 329,
+        currency: "SGD",
+        tags: ["8GB", "sweet spot"],
+        test: { peakTempC: 72, notes: "Example sold item — remove if you want." },
+        desc:
+`[Status] SOLD (example)
+[Tip] Keep as a “past sales” sample or delete this entry.`
+      }
+    ];
+
+    // ========= UI logic =========
+    const $ = (s)=>document.querySelector(s);
+    const grid = $("#grid");
+    const q = $("#q");
+    const brand = $("#brand");
+    const vram = $("#vram");
+    const grade = $("#grade");
+    const statusSel = $("#status");
+    const resetBtn = $("#resetBtn");
+    const toast = $("#toast");
+    const dlg = $("#dlg");
+
+    $("#year").textContent = new Date().getFullYear();
+
+    const waLink = `https://wa.me/${CONTACT.whatsappE164}?text=${encodeURIComponent("Hi! I want to ask about your used GPUs:")}`;
+    $("#waBtn").href = waLink;
+    $("#mailBtn").href = `mailto:${CONTACT.email}?subject=${encodeURIComponent("GPU Inquiry / Order")}&body=${encodeURIComponent("Hi, I'm interested in:\n\nModel:\nBudget:\nPickup/Shipping:\n\n")}`;
+
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.style.display = "block";
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(()=>toast.style.display="none", 2200);
+    }
+
+    function badgeClass(s){
+      if(s==="in_stock") return "ok";
+      if(s==="reserved") return "warn";
+      return "bad";
+    }
+    function statusText(s){
+      if(s==="in_stock") return "IN STOCK";
+      if(s==="reserved") return "RESERVED";
+      return "SOLD";
+    }
+
+    function renderBrandOptions(){
+      const brands = Array.from(new Set(PRODUCTS.map(p=>p.brand))).sort();
+      brands.forEach(b=>{
+        const opt = document.createElement("option");
+        opt.value = b;
+        opt.textContent = `Brand: ${b}`;
+        brand.appendChild(opt);
+      });
+    }
+
+    function matchProduct(p){
+      const qq = (q.value||"").trim().toLowerCase();
+      const b = brand.value;
+      const vr = vram.value;
+      const gr = grade.value;
+      const st = statusSel.value;
+
+      const hay = [
+        p.id, p.title, p.brand, String(p.vram), p.grade, p.status, ...(p.tags||[]), (p.desc||"")
+      ].join(" ").toLowerCase();
+
+      if(qq && !hay.includes(qq)) return false;
+      if(b && p.brand !== b) return false;
+      if(vr && String(p.vram) !== String(vr)) return false;
+      if(gr && p.grade !== gr) return false;
+      if(st && p.status !== st) return false;
+      return true;
+    }
+
+    function cardHtml(p){
+      const badge = statusText(p.status);
+      const bcls = badgeClass(p.status);
+      const price = `${p.currency} ${p.price}`;
+      const meta = [
+        `${p.brand}`,
+        `${p.vram}GB`,
+        `Grade ${p.grade}`,
+        `Peak ${p.test?.peakTempC ?? "—"}°C`
+      ];
+
+      return `
+        <div class="card">
+          <div class="thumb">
+            <div class="badge ${bcls}">${badge}</div>
+          </div>
+          <div class="card-body">
+            <div class="title">
+              <h3>${escapeHtml(p.title)}</h3>
+              <div class="price">${escapeHtml(price)}</div>
+            </div>
+            <div class="meta">
+              ${meta.map(x=>`<span class="tag">${escapeHtml(x)}</span>`).join("")}
+            </div>
+            <div class="notes">${escapeHtml(p.test?.notes ?? "")}</div>
+            <div class="card-actions">
+              <button class="btn small" data-act="detail" data-id="${p.id}">Details</button>
+              <button class="btn small" data-act="copy" data-id="${p.id}">Copy</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function render(){
+      const list = PRODUCTS.filter(matchProduct);
+      $("#statCount").textContent = PRODUCTS.filter(p=>p.status==="in_stock").length;
+
+      if(list.length === 0){
+        grid.innerHTML = `
+          <div class="panel" style="grid-column:1/-1">
+            <b>No matching items</b>
+            <div class="muted" style="margin-top:6px">Try another keyword or hit “Reset”.</div>
+          </div>
+        `;
+        return;
+      }
+      grid.innerHTML = list.map(cardHtml).join("");
+    }
+
+    function copyText(t){
+      navigator.clipboard.writeText(t).then(()=>showToast("Copied")).catch(()=>showToast("Copy failed"));
+    }
+
+    function productText(p){
+      return [
+        `fenghuo technology`,
+        `ID: ${p.id}`,
+        `Model: ${p.title}`,
+        `Price: ${p.currency} ${p.price}`,
+        `Status: ${statusText(p.status)}`,
+        `Grade: ${p.grade}`,
+        `VRAM: ${p.vram}GB`,
+        `Testing: Peak ${p.test?.peakTempC ?? "—"}°C; ${p.test?.notes ?? ""}`,
+        `Notes:\n${p.desc ?? ""}`
+      ].join("\n");
+    }
+
+    function openDetail(p){
+      $("#mKicker").textContent = `${p.currency} ${p.price} · ${statusText(p.status)} · Grade ${p.grade}`;
+      $("#mTitle").textContent = p.title;
+      $("#mMeta").textContent = `${p.brand} · ${p.vram}GB · ID ${p.id}`;
+      $("#mDesc").textContent = p.desc || "";
+      $("#mBuy").href = "#contact";
+      $("#mCopy").onclick = ()=>copyText(productText(p));
+      dlg.showModal();
+    }
+
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, (c)=>({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+      }[c]));
+    }
+
+    // events
+    [q, brand, vram, grade, statusSel].forEach(el=>el.addEventListener("input", render));
+    resetBtn.addEventListener("click", ()=>{
+      q.value=""; brand.value=""; vram.value=""; grade.value=""; statusSel.value="";
+      render();
+    });
+
+    grid.addEventListener("click", (e)=>{
+      const btn = e.target.closest("button");
+      if(!btn) return;
+      const id = btn.getAttribute("data-id");
+      const act = btn.getAttribute("data-act");
+      const p = PRODUCTS.find(x=>x.id===id);
+      if(!p) return;
+      if(act==="detail") openDetail(p);
+      if(act==="copy") copyText(productText(p));
+    });
+
+    $("#closeDlg").addEventListener("click", ()=>dlg.close());
+
+    $("#copyOrderBtn").addEventListener("click", ()=>copyText($("#orderTpl").textContent.trim()));
+    $("#copyContactBtn").addEventListener("click", ()=>copyText(CONTACT.displayText));
+
+    $("#copyLinkBtn").addEventListener("click", async ()=>{
+      try{
+        await navigator.clipboard.writeText(location.href);
+        showToast("Link copied");
+      }catch{
+        showToast("Copy failed");
+      }
+    });
+
+    // initial
+    renderBrandOptions();
+    render();
+  </script>
+</body>
+</html>
