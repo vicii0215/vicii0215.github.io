@@ -3,7 +3,7 @@ const CONTACT = {
   whatsappE164: "+1 6572628377", // change to your WhatsApp number (country code + number)
   email: "wleo80215@gmail.com", // change to your email
   address: "blk 819 Jurong West Street, Singapore", // replace with your real address
-  displayText: "Fenghuo Technology (Qi Wei) | WhatsApp: +65 8888 8888 | Email: sales@fenghuo.tech | Address: blk 819 Jurong West Street, Singapore"
+  displayText: "Fenghuo Technology (Qi Wei) | WhatsApp: +1 6572628377 | Email: sales@fenghuo.tech | Address: blk 819 Jurong West Street, Singapore"
 };
 
 // status: in_stock / reserved / sold
