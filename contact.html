@@ -47,19 +47,17 @@
         <div class="two-col">
           <div>
             <h3 style="margin:0 0 8px">Quick contact</h3>
-            <p class="muted" style="margin:0 0 10px">
-              Update these to your real WhatsApp/email details.
-            </p>
             <div class="row">
               <a class="btn primary" id="waBtn" href="#" target="_blank" rel="noreferrer">WhatsApp</a>
-              <a class="btn" id="mailBtn" href="#">Email</a>
               <button class="btn" id="copyContactBtn" type="button">Copy Contact</button>
             </div>
             <div class="hr"></div>
             <div class="hint">
               Business name: <b>Fenghuo Technology</b> · Owner: <b>Qi Wei</b><br/>
-              Address: <b>blk 819 Jurong West Street, Singapore</b> <br/>
-              Payment methods: PayNow / bank transfer 
+              Address: <b>Blk 819 Jurong West Street 81, Singapore 640819</b> <br/>
+              Phone: <b>+1 657 262 8377</b> · WhatsApp: <b>+65 8464 3912</b><br/>
+              Email: <b>wleo80215@gmail.com</b><br/>
+              Payment methods: <b>PayNow / Credit Card / Wise / Bank Transfer</b>
             </div>
           </div>
 
@@ -85,6 +83,48 @@ Requested tests:
         </div>
 
         <div class="hr"></div>
+        <div class="panel">
+          <h3 style="margin:0 0 8px">Request / Purchase (directly from website)</h3>
+          <p class="muted" style="margin:0 0 12px">
+            Fill this form and send via Email or WhatsApp. We will confirm stock, total price, and delivery/pickup.
+          </p>
+          <form id="orderForm" class="two-col">
+            <div>
+              <label class="muted">Your name</label>
+              <input id="fName" class="input" placeholder="Name" required />
+            </div>
+            <div>
+              <label class="muted">Contact (phone/email)</label>
+              <input id="fContact" class="input" placeholder="Phone or email" required />
+            </div>
+            <div>
+              <label class="muted">Item / Model</label>
+              <input id="fItem" class="input" placeholder="e.g., RTX 3070 ASUS TUF" required />
+            </div>
+            <div>
+              <label class="muted">Budget (SGD)</label>
+              <input id="fBudget" class="input" placeholder="e.g., 400" />
+            </div>
+            <div>
+              <label class="muted">Pickup or shipping</label>
+              <input id="fDelivery" class="input" placeholder="Pickup / Delivery" required />
+            </div>
+            <div>
+              <label class="muted">Address (if delivery)</label>
+              <input id="fAddress" class="input" placeholder="Delivery address (optional)" />
+            </div>
+            <div style="grid-column:1/-1">
+              <label class="muted">Notes / requested tests</label>
+              <textarea id="fNotes" class="input" rows="4" placeholder="Requested tests, preferred delivery time, etc."></textarea>
+            </div>
+            <div class="row" style="grid-column:1/-1">
+              <button class="btn primary" id="sendWaBtn" type="button">Send via WhatsApp</button>
+              <span class="hint">Submitting opens WhatsApp with a pre-filled message.</span>
+            </div>
+          </form>
+        </div>
+
+        <div class="hr"></div>
         <div class="hint">
           © <span id="year"></span> Fenghuo Technology (Qi Wei). Listings show prices and availability; final confirmation via direct message/invoice.
         </div>
@@ -97,9 +137,11 @@ Requested tests:
           <div>🔥 Fenghuo Technology (Qi Wei) — Used GPUs</div>
           <div class="mono"> </div>
         </div>
-        <div class="row" style="margin-top:8px;justify-content:space-between">
-          <div class="muted">Address: blk 819 Jurong West Street 81, Singapore</div>
+        <div class="contact-grid">
+          <div class="muted">Address: Blk 819 Jurong West Street 81, Singapore 640819</div>
           <div class="muted">Phone: +1 657 262 8377</div>
+          <div class="muted">WhatsApp: +65 8464 3912</div>
+          <div class="muted">Email: wleo80215@gmail.com</div>
         </div>
       </div>
     </div>

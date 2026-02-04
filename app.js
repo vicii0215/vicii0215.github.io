@@ -1,9 +1,9 @@
 // ========= Edit these: contact + inventory =========
 const CONTACT = {
-  whatsappE164: "16572628377", // change to your WhatsApp number (country code + number)
-  email: "wleo80215@gmail.com", // change to your email
-  address: "blk 819 Jurong West Street, Singapore", // replace with your real address
-  displayText: "Fenghuo Technology (Qi Wei) | WhatsApp: +1 657 262 8377 | Email: sales@fenghuo.tech | Address: blk 819 Jurong West Street, Singapore"
+  whatsappE164: "6584643912", // WhatsApp number (country code + number)
+  email: "wleo80215@gmail.com",
+  address: "Blk 819 Jurong West Street 81, Singapore 640819",
+  displayText: "Fenghuo Technology (Qi Wei) | WhatsApp: +65 8464 3912 | Phone: +1 657 262 8377 | Email: wleo80215@gmail.com | Address: Blk 819 Jurong West Street 81, Singapore 640819"
 };
 
 // status: in_stock / reserved / sold
@@ -89,13 +89,39 @@ const yearEl = $("#year");
 if(yearEl) yearEl.textContent = new Date().getFullYear();
 
 const waBtn = $("#waBtn");
-const mailBtn = $("#mailBtn");
 if(waBtn){
   const waLink = `https://wa.me/${CONTACT.whatsappE164}?text=${encodeURIComponent("Hi! I want to ask about your used GPUs:")}`;
   waBtn.href = waLink;
 }
-if(mailBtn){
-  mailBtn.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent("GPU Inquiry / Order")}&body=${encodeURIComponent("Hi, I'm interested in:\n\nModel:\nBudget:\nPickup/Shipping:\n\n")}`;
+
+function buildOrderMessage(){
+  const name = $("#fName")?.value?.trim() || "";
+  const contact = $("#fContact")?.value?.trim() || "";
+  const item = $("#fItem")?.value?.trim() || "";
+  const budget = $("#fBudget")?.value?.trim() || "";
+  const delivery = $("#fDelivery")?.value?.trim() || "";
+  const addr = $("#fAddress")?.value?.trim() || "";
+  const notes = $("#fNotes")?.value?.trim() || "";
+
+  return [
+    "Order / Inquiry",
+    `Name: ${name}`,
+    `Contact: ${contact}`,
+    `Item: ${item}`,
+    `Budget (SGD): ${budget || "-"}`,
+    `Pickup/Shipping: ${delivery}`,
+    `Address: ${addr || "-"}`,
+    `Notes: ${notes || "-"}`,
+  ].join("\n");
+}
+
+const sendWaBtn = $("#sendWaBtn");
+if(sendWaBtn){
+  sendWaBtn.addEventListener("click", ()=>{
+    const text = buildOrderMessage();
+    const waLink = `https://wa.me/${CONTACT.whatsappE164}?text=${encodeURIComponent(text)}`;
+    window.open(waLink, "_blank", "noopener");
+  });
 }
 
 function showToast(msg){
@@ -256,7 +282,8 @@ function openDetail(p){
   $("#mTitle").textContent = p.title;
   $("#mMeta").textContent = `${p.brand} · ${p.vram}GB · ID ${p.id}`;
   $("#mDesc").textContent = p.desc || "";
-  $("#mBuy").href = "contact.html";
+  const waText = productText(p);
+  $("#mBuy").href = `https://wa.me/${CONTACT.whatsappE164}?text=${encodeURIComponent(waText)}`;
   $("#mCopy").onclick = ()=>copyText(productText(p));
   dlg.showModal();
 }
