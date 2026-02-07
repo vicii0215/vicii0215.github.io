@@ -3,7 +3,7 @@ const CONTACT = {
   whatsappE164: "6584643912", // WhatsApp number (country code + number)
   email: "wleo80215@gmail.com",
   address: "Blk 819 Jurong West Street 81, Singapore 640819",
-  displayText: "Fenghuo Technology (Qi Wei) | WhatsApp: +65 8464 3912 | Phone: +1 657 262 8377 | Email: wleo80215@gmail.com | Address: Blk 819 Jurong West Street 81, Singapore 640819"
+  displayText: "SG community club | WhatsApp: +65 8464 3912 | Phone: +1 657 262 8377 | Email: wleo80215@gmail.com | Address: Blk 819 Jurong West Street 81, Singapore 640819"
 };
 
 // status: in_stock / reserved / sold
@@ -264,7 +264,7 @@ function render(){
 
 function productText(p){
   return [
-    `Fenghuo Technology (Qi Wei)`,
+    `SG community club`,
     `ID: ${p.id}`,
     `Model: ${p.title}`,
     `Price: ${p.currency} ${p.price}`,
