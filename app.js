@@ -78,6 +78,53 @@ const PRODUCTS = [
     desc:
 `[Status] SOLD (example)
 [Tip] Keep as a “past sales” sample or delete this entry.`
+  },
+  {
+    id: "SV-SOFTDEV-01",
+    type: "service",
+    title: "Software Development (Custom Projects)",
+    brand: "SERVICE",
+    image: "",
+    status: "in_stock",
+    priceText: "Quote",
+    tags: ["web/apps", "automation", "integrations"],
+    test: { notes: "Share your requirements for a tailored estimate." },
+    desc:
+`[Service] Custom software development
+[Scope] Web apps, internal tools, scripts, integrations
+[Timeline] Depends on scope
+[Notes] Provide requirements, budget, and deadline for a quote.`
+  },
+  {
+    id: "SV-DEBUG-01",
+    type: "service",
+    title: "Debug Service (PC / Software)",
+    brand: "SERVICE",
+    image: "",
+    status: "in_stock",
+    priceText: "From SGD 60",
+    tags: ["diagnosis", "bug fixing", "performance"],
+    test: { notes: "Initial diagnosis first; fixes quoted after review." },
+    desc:
+`[Service] Debugging for PC/software issues
+[Includes] Crash investigation, error logs, performance checks
+[Deliverable] Root cause + fix plan or patch
+[Notes] Bring logs / screenshots for faster turnaround.`
+  },
+  {
+    id: "SV-GPUREPAIR-01",
+    type: "service",
+    title: "GPU Repair & Maintenance",
+    brand: "SERVICE",
+    image: "",
+    status: "in_stock",
+    priceText: "From SGD 80",
+    tags: ["diagnosis", "cleaning", "thermal"],
+    test: { notes: "Inspection required; pricing depends on parts and labor." },
+    desc:
+`[Service] GPU repair, cleaning, and thermal servicing
+[Includes] Cleaning, repaste, thermal pads, fan check
+[Notes] Final quote after inspection; parts cost extra if needed.`
   }
 ];
 
@@ -212,13 +259,20 @@ function matchProduct(p){
 function cardHtml(p){
   const badge = statusText(p.status);
   const bcls = badgeClass(p.status);
-  const price = `${p.currency} ${p.price}`;
-  const meta = [
-    `${p.brand}`,
-    `${p.vram}GB`,
-    `Grade ${p.grade}`,
-    `Peak ${p.test?.peakTempC ?? "—"}°C`
-  ];
+  const isService = p.type === "service";
+  const price = p.priceText ?? `${p.currency} ${p.price}`;
+  const meta = isService
+    ? [
+        `${p.brand}`,
+        "Service",
+        ...(p.tags || []).slice(0, 2)
+      ]
+    : [
+        `${p.brand}`,
+        `${p.vram}GB`,
+        `Grade ${p.grade}`,
+        `Peak ${p.test?.peakTempC ?? "—"}°C`
+      ];
 
   return `
     <div class="card">
@@ -263,6 +317,16 @@ function render(){
 }
 
 function productText(p){
+  if(p.type === "service"){
+    return [
+      `SG community club`,
+      `ID: ${p.id}`,
+      `Service: ${p.title}`,
+      `Price: ${p.priceText ?? `${p.currency} ${p.price}`}`,
+      `Status: ${statusText(p.status)}`,
+      `Notes:\n${p.desc ?? ""}`
+    ].join("\n");
+  }
   return [
     `SG community club`,
     `ID: ${p.id}`,
@@ -278,9 +342,14 @@ function productText(p){
 
 function openDetail(p){
   if(!dlg) return;
-  $("#mKicker").textContent = `${p.currency} ${p.price} · ${statusText(p.status)} · Grade ${p.grade}`;
+  const priceText = p.priceText ?? `${p.currency} ${p.price}`;
+  $("#mKicker").textContent = p.type === "service"
+    ? `${priceText} · ${statusText(p.status)}`
+    : `${priceText} · ${statusText(p.status)} · Grade ${p.grade}`;
   $("#mTitle").textContent = p.title;
-  $("#mMeta").textContent = `${p.brand} · ${p.vram}GB · ID ${p.id}`;
+  $("#mMeta").textContent = p.type === "service"
+    ? `${p.brand} · Service · ID ${p.id}`
+    : `${p.brand} · ${p.vram}GB · ID ${p.id}`;
   $("#mDesc").textContent = p.desc || "";
   const waText = productText(p);
   $("#mBuy").href = `https://wa.me/${CONTACT.whatsappE164}?text=${encodeURIComponent(waText)}`;
